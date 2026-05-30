@@ -1,0 +1,53 @@
+Iterative Solution O(log10(n)) Time or O(Number of digits) and O(1) Space
+- The idea is to count the digits by removing the digits from the input number starting from right(least significant digit) to left(most significant digit) till the number is reduced to 0. 
+- We are removing digits from the right because the rightmost digit can be removed simply by performing integer division by 10. 
+- For eg: n = 1567, then 1567 / 10 = 156.7 = 156(Integer Division).
+
+class GfG {
+    // Recursively counts the number of digits in the number 'n'
+    static int countDigit(int n)
+    {
+        // Base case: if 'n' is a single-digit number
+        if (n / 10 == 0)
+            return 1;
+
+        // Recursive call: strip one digit and count
+        return 1 + countDigit(n / 10);
+    }
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Using log base 10 function - O(1) Time and O(1) Space
+- We can use log10(logarithm of base 10) to count the number of digits of positive numbers (logarithm is not defined for negative numbers). 
+- For negative numbers, first take the absolute value of n, since logarithm is not defined for negative values.
+- Digit count of n = floor(log10(n) + 1) 
+
+public class GfG {
+    public static int countDigit(int n) {
+        // Handle zero separately
+        if (n == 0) return 1;
+
+        // Convert negative to positive
+        n = Math.abs(n);
+
+        return (int)Math.floor(Math.log10(n)) + 1;
+    }
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Converting Number to String - O(Number of digits) Time and O(Number of digits) Space
+- We can convert the number into a string and then find the length of the string to get the number of digits in the original number. 
+- If the number is negative, the string will contain a '-' sign, so subtract 1 from the length.
+
+public class GfG {
+    public static int countDigit(int n) {
+        // Convert integer to string
+        String num = Integer.toString(n);
+
+        // If negative, exclude '-' sign
+        if (num.charAt(0) == '-')
+            return num.length() - 1;
+
+        return num.length();
+    }
+}
