@@ -1,0 +1,62 @@
+[Naive Approach] Iterating till n - O(n) Time and O(1) Space
+  The idea is to iterate over all the numbers from 1 to n and for each number check if the number divides n. If the number divides n, print it. 
+  
+  public static ArrayList<Integer> printDivisors(int n) {
+          
+          ArrayList<Integer> divisors = new ArrayList<>();
+  
+          // Iterate from 1 to n and check divisibility
+          for (int i = 1; i <= n; i++) {
+              if (n % i == 0) {
+                  
+                  // If 'i' divides 'n' evenly, it's a divisor
+                  divisors.add(i);
+              }
+          }
+  
+          // Return the list of divisors
+          return divisors;
+      }   
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+[Expected Approach] Finding all factors in pairs - O(sqrt(n)) Time and O(1) Space
+  If we look carefully, all the divisors of a number appear in pairs.
+  For example, if n = 100, then the divisor pairs are:
+  (1, 100), (2, 50), (4, 25), (5, 20), (10, 10).
+  
+  We need to be careful in cases like (10, 10)—i.e., when both divisors in a pair are equal (which happens when n is a perfect square). In such cases, we should include that divisor only once.
+  Using this fact, we can optimize our program significantly.
+  
+  Instead of iterating from 1 to n, we only need to iterate from 1 to √n.
+  Why? Because for any factor a of n, the corresponding factor b = n / a forms a pair (a, b).
+  At least one of the two values in any such pair must lie within the range [1, √n].
+  
+  So, we can:
+  
+  Iterate from 1 to √n to find all divisors less than or equal to √n.
+  For each such divisor d, also add n / d as the paired divisor.
+  Take care not to duplicate the square root divisor if n is a perfect square.
+  
+   static ArrayList<Integer> printDivisors(int n) {
+          ArrayList<Integer> divisors = new ArrayList<>();
+          
+          // Note that this loop runs till square root
+          for (int i = 1; i <= Math.sqrt(n); i++) {
+              if (n % i == 0) {
+  
+                  // If divisors are equal, add only once
+                  if (n / i == i) {
+                      divisors.add(i);
+                  }
+                  // Otherwise add both
+                  else {
+                      divisors.add(i);
+                      divisors.add(n / i);
+                  }
+              }
+          }
+          return divisors;
+      }
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
