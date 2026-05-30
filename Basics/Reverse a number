@@ -1,0 +1,40 @@
+M-1 : Reversing Digit by Digit
+This idea for this approach is to repeatedly extract the last digit of n using the modulus operator (n % 10) and appending it to the reverse number (revNum). 
+After extracting the digit, the number n is reduced by dividing it by 10 (n = n / 10). 
+This process continues until n becomes 0. 
+Finally, the reversed number (revNum) is returned.
+
+class GfG {
+    static int reverseDigits(int n) {
+        int revNum = 0;
+        while (n > 0) {
+            revNum = revNum * 10 + n % 10;
+            n = n / 10;
+        }
+        return revNum;
+    }
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+M-2 : Using String
+This approach reverses a number by converting it into a string, reversing the string, and then converting it back into an integer. 
+This avoids manual digit manipulation by leveraging string operations. The string reversal is done using a built-in function, and the result is then converted back to an integer and returned. 
+This method is straightforward but requires extra space for the string conversion.
+
+ class GfG {
+    static int reversDigits(int n) {
+        // converting number to string
+        StringBuffer s
+            = new StringBuffer(String.valueOf(n));
+
+        // reversing the string
+        s.reverse();
+
+        // converting string to integer
+        n = Integer.parseInt(String.valueOf(s));
+
+        // returning integer
+        return n;
+    }
+}
+
