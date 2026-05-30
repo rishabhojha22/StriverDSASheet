@@ -1,0 +1,25 @@
+[Naive Approach] Basic Trial Division - O(n) Time and O(1) Space
+To check if a number n is prime, first see if it's less than 2 — if so, it's not prime. 
+Otherwise, try dividing n by every number from 2 to n - 1. If any number divides it evenly, then n is not prime. 
+If none do, then n is a prime number.
+
+
+[Better Approach] Square Root Trial Division - O(√n) time and O(1) space
+The idea is that we only need to check divisors up to √n (i.e., while i * i <= n) because divisors always come in pairs - one smaller and one larger. If a larger divisor exists beyond √n, its smaller paired divisor would have already been checked, making further checks unnecessary.
+
+Every number n can be written as a product of two numbers: n=a×b. Here, a and b are divisors of n.
+
+Example: n = 36
+
+36 = 2 × 18 - pair (2,18)
+36 = 3 × 12 - pair (3,12)
+36 = 4 × 9 - pair (4,9)
+36 = 6 × 6 - pair (6,6)
+Why does this work?
+
+Consider a number n with a pair of factors (a, b) such that a × b = n.
+
+If a < b, then a × a < a × b = n, which means a < √n.
+This shows that any factor larger than √n must have a corresponding factor smaller than or equal to √n.
+Therefore, it is enough to check numbers up to √n.
+If no factor ≤ √n is found, n is prime.
