@@ -1,0 +1,80 @@
+[Approach 1] Naive Approach
+Time Complexity: O(d*log(d)), where d is the number of digits in n, since we compute the power for each digit.
+Space Complexity: O(1)
+
+The idea is to first count the number of digits (or find the order). Let the number of digits be n. 
+For every digit r in input number x, compute r to the power n. 
+If the sum of all such values is equal to x, then return true, else false. 
+
+class GfG {
+
+    // Function to calculate x raised to the power y
+    public static int power(int x, int y) {
+        if (y == 0)
+            return 1;
+        if (y % 2 == 0)
+            return power(x, y / 2) * power(x, y / 2);
+        return x * power(x, y / 2) * power(x, y / 2);
+    }
+
+    // Function to count number of digits
+    public static int order(int n) {
+        int t = 0;
+        while (n != 0) {
+            t++;
+            n = n / 10;
+        }
+        return t;
+    }
+
+    // Function to check whether the given number is Armstrong or not
+    public static boolean armstrong(int n) {
+        int x = order(n);
+        int temp = n, sum = 0;
+
+        while (temp != 0) {
+            int r = temp % 10;
+            sum += power(r, x);
+            temp = temp / 10;
+        }
+
+        return sum == n;
+    }
+
+    public static void main(String[] args) {
+        int n = 153;
+        if (armstrong(n)) {
+            System.out.println("true");
+        } else {
+            System.out.println("false");
+        }
+    }
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+[Approach 2] Using Numeric Strings
+Time Complexity: O(d*log(d)), where d is the number of digits in n, since we compute the power for each digit.
+Space Complexity: O(1)
+
+The idea is to determine if a number is an Armstrong number by first converting it to a string to easily access its digits and count them. 
+Each digit is then raised to the power of the total number of digits, and the results are summed. 
+If this sum is equal to the original number, it is classified as an Armstrong number. 
+This approach leverages simple string manipulation and power calculation to perform the check efficiently.
+
+public static boolean armstrong(int n) {
+        // converting to string
+        String number = Integer.toString(n);
+
+        int length = number.length();
+        int output = 0;
+
+        for (char c : number.toCharArray()) {
+            output += (int) Math.pow(c - '0', length);
+        }
+
+        // check if equal to number
+        if (output == Integer.parseInt(number))
+            return true;
+        else
+            return false;
+}
