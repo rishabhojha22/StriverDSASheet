@@ -3,6 +3,8 @@ To check if a number n is prime, first see if it's less than 2 — if so, it's n
 Otherwise, try dividing n by every number from 2 to n - 1. If any number divides it evenly, then n is not prime. 
 If none do, then n is a prime number.
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 [Better Approach] Square Root Trial Division - O(√n) time and O(1) space
 The idea is that we only need to check divisors up to √n (i.e., while i * i <= n) because divisors always come in pairs - one smaller and one larger. If a larger divisor exists beyond √n, its smaller paired divisor would have already been checked, making further checks unnecessary.
@@ -23,3 +25,36 @@ If a < b, then a × a < a × b = n, which means a < √n.
 This shows that any factor larger than √n must have a corresponding factor smaller than or equal to √n.
 Therefore, it is enough to check numbers up to √n.
 If no factor ≤ √n is found, n is prime.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+[Expected Approach] Optimized Square Root Trial Division - O(√n) Time and O(1) Space
+Numbers that are divisible by 2 or 3 are not prime, so we can skip them entirely. To check whether a number is prime, it is sufficient to test only the numbers of the form 6k ± 1 up to √n.
+
+Why all prime greater than 3 can be expressed in the form 6k ± 1?
+
+The forms 6k, 6k+2 and 6k + 4 are all even and greater than, so they are composite. The form is a multiple of and greater than , so it is composite.
+The form 6K + 3 is a multiple of 3
+The only remaining forms are 6k + 1 and 6K + 5. The form 6K + 5 can can be rewritten as 6(k + 1) - 1, so it is covered under (6k - 1) for k = k + 1.
+
+ static boolean isPrime(int n) {
+      
+    // Check if n is 1 or 0
+    if (n <= 1)
+        return false;
+
+    // Check if n is 2 or 3
+    if (n == 2 || n == 3)
+        return true;
+
+    // Check whether n is divisible by 2 or 3
+    if (n % 2 == 0 || n % 3 == 0)
+        return false;
+    
+    //Check numbers of the form 6k ± 1 up to √n
+    for (int i = 5; i *i<=n; i = i + 6)
+        if (n % i == 0 || n % (i + 2) == 0)
+            return false;
+
+    return true;
+}
