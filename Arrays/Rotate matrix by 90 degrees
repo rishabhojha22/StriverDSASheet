@@ -10,6 +10,24 @@ mat[3][3] goes to mat[3][0]
 
 Mainly we need to move mat[i][j] to mat[j][n-i-1]. We first move elements in a temporary matrix, then copy the temporary to the original. If we directly copy elements within the matrix, it would cause data loss.
 
+class Solution {
+     // Function to rotate the matrix by 90 degrees clockwise
+    static void rotate90(int[][] mat) {
+        int n = mat.length;
+
+        // Initialize the result matrix with zeros
+        int[][] res = new int[n][n];
+
+        // Flip the matrix clockwise using nested loops
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                res[j][n - i - 1] = mat[i][j];
+            }
+        }
+    }
+}
+
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 [Expected Approach 2] Transposing and Reversing Rows - O(n^2) Time and O(1) Space
 When you think about rotating a square matrix 90 degrees clockwise, each element moves to a new position. The top row becomes the right column, the second row becomes the second-right column, and so forth. If we first transpose the matrix and then find reverse of every row, we get the desired result.
@@ -23,7 +41,6 @@ Perform Transpose of the matrix
 4  5  6   —Transpose->   2  5  8     —-Reverse rows—->   8  5  2  
 
 7  8  9                                 3  6  9                                          9  6  3
--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class Solution {
     public void rotateMatrix(int[][] mat) {
