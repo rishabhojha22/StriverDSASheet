@@ -1,0 +1,18 @@
+Iterative Approach - O(n) Time and O(1) Space
+Traverse the entire array and keep track of the largest element encountered. Update the maximum value whenever a larger element is found, and after scanning all elements, the stored value represents the largest element in the array.
+
+Recursive Approach - O(n) Time and O(n) Space
+The idea is similar to the iterative approach. Here the traversal of the array is done recursively instead of an iterative loop.
+---------------------------------------------------------------------------------------------------------------------------------------
+
+static int largest(int[] arr) {
+        int max = arr[0];
+
+        // Traverse array elements from second and
+        // compare every element with current max
+        for (int i = 1; i < arr.length; i++)
+            if (arr[i] > max)
+                max = arr[i];
+
+        return max;
+}
