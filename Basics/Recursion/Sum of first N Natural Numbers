@@ -1,0 +1,37 @@
+[Naive Approach] Using Loop - O(n) Time and O(1) Space
+Initialize sum as 0
+Run a loop from i equals to 1 to n. Inside the loop add i to sum.
+
+------------------------------------
+
+[Alternative Approach] Using Recursion -O(n) and O(n) Space
+In this approach, we use recursion to find the sum of the first n natural numbers. 
+The function calls itself with (n-1) until it reaches the base case of n = 1. 
+Each call adds the current value of n to the sum of smaller values, effectively building the result in a top-down manner.
+
+
+-------------------------------------
+
+[Expected Approach] Formula Based Method- O(1) Time and O(1) Space
+Sum of first n natural numbers = (n * (n+1)) / 2
+
+For example: n = 5
+Sum = (5 * (5 + 1)) / 2 = (5 * 6) / 2 = 30 / 2 = 15
+
+
+
+
+import java.io.*;
+class GfG{
+    static int findSum(int n)
+    {
+        // Using mathematical formula to compute
+        // sum of first n natural numbers
+        return n * (n + 1) / 2;
+    }
+    public static void main(String args[])
+    {
+        int n = 5;
+        System.out.println(findSum(n));
+    }
+}
