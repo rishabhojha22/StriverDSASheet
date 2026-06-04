@@ -1,0 +1,27 @@
+Iterative approach - O(n) Time and O(1) Space
+We traverse from the second element. For every element we check if it is smaller than or equal to previous element or not. 
+At any point if we find previous element greater, we return false. 
+
+------------------------------
+
+Recursive approach - O(n) Time and O(n) Space
+The idea is to check if the last two elements are in order, then recursively check the rest of the array. 
+The base case is when the array has zero or one element, which is always considered sorted.
+
+  static boolean isSorted(int arr[]) {
+        
+        int n = arr.length;
+        // Iterate over the array and check if 
+        // every element is greater than or
+        // equal to previous element.
+        for (int i = 1; i < n; i++)
+            if (arr[i - 1] > arr[i])
+                return false;
+
+        return true;
+    }
+------------------------------
+
+Using Built-in Methods (Applicable for C++ and Python Only) - O(n) Time and O(1) Space
+The idea behind here is we use built-in methods in STL of C++ and Python to check if an array is sorted or not.
+
