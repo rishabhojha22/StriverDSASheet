@@ -1,0 +1,16 @@
+[Naive Approach] Brute Force - O(n2) Time O(n) Space
+A simple solution is to run two loops. For every item count number of times, it occurs. To avoid duplicate printing, keep track of processed items.
+
+------------------------------------
+
+[Better Approach] Using binary search
+We can find frequency of array elements using Binary search function . First we will sort the array for binary search . 
+Our frequency of element will be '(last occ - first occ) + 1' of a element in a array.
+
+-----------------------------------
+
+[Expected Solution] Using hashing - O(n) Time and O(n) Space
+An efficient solution  is using  a hash map (e.g. unordered_map in C++, HashMap in Java, dict in Python, or Dictionary in C#), we can store elements as keys and their frequencies as values.
+
+-----------------------------------
+
