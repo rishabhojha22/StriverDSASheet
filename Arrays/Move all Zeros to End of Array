@@ -1,0 +1,38 @@
+[Naive Approach] Using Temporary Array - O(n) Time and O(n) Space
+The idea is to use a temporary array of the same size, copy all non-zero elements into it, fill the remaining positions with zeros, and then copy the temporary array back to the original array.
+
+----------------------------
+
+[Better Approach] Two Traversals-O(n) Time and O(1) space
+The idea is to move all the zeros to the end of the array while maintaining the relative order of non-zero elements using two traversals. 
+Traverse the array once to move all non-zero elements to the front while maintaining order, then traverse the remaining positions and fill them with zeros.
+
+---------------------------
+
+[Expected Approach] One Traversal-O(n) Time and O(1) space
+The idea is similar to the previous approach where we took a pointer, say count to track where the next non-zero element should be placed. 
+However, on encountering a non-zero element, instead of directly placing the non-zero element at arr[count], we will swap the non-zero element with arr[count]. 
+This will ensure that if there is any zero present at arr[count], it is pushed towards the end of array and is not overwritten.
+
+
+static void pushZerosToEnd(int[] arr) {
+        // Pointer to track the position 
+        // for next non-zero element
+        int count = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+
+            // If the current element is non-zero
+            if (arr[i] != 0) {
+
+                // Swap the current element with
+                // the 0 at index 'count'
+                int temp = arr[i];
+                arr[i] = arr[count];
+                arr[count] = temp;
+
+                // Move 'count' pointer to 
+                // the next position
+                count++;
+         }
+  }
