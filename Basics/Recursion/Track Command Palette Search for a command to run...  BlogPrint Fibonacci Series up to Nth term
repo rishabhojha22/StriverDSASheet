@@ -1,0 +1,36 @@
+Using Iteration - O(n) Time O(1) Space
+The idea is to use a loop and keep track of the previous two Fibonacci numbers. Each next Fibonacci number is obtained by adding the previous two numbers.
+
+--------------------------------
+
+Pascal’s Triangle
+Pascal’s Triangle is a triangular arrangement of numbers where each number is the sum of the two numbers directly above it. 
+It is widely used in combinatorics, probability, and binomial expansion. 
+An interesting relation exists between Pascal’s Triangle and the Fibonacci Sequence. 
+The sum of the shallow diagonals of Pascal’s Triangle forms the Fibonacci sequence.
+
+-----------------------------
+Using Recirsion
+
+public class RecursiveFibonacci {
+
+    // Recursive function to compute Nth Fibonacci number
+    public static int fibonacci(int N) {
+        // Base case: return N if it's 0 or 1
+        if (N <= 1) {
+            return N;
+        }
+
+        // Recursive case: calculate previous two terms
+        int last = fibonacci(N - 1);    // (N-1)th term
+        int slast = fibonacci(N - 2);   // (N-2)th term
+
+        return last + slast;
+    }
+
+    public static void main(String[] args) {
+        int N = 4;
+        System.out.println(fibonacci(N));  // Output: 3
+    }
+}
+
