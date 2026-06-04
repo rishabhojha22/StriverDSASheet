@@ -1,0 +1,35 @@
+[Approach - 1] Using Simple Traversal - O(n) Time and O(1) Space
+The idea is to traverse the array once and count how many times the same value repeats consecutively. 
+The thought process is to use a counter that increases when the current element matches the previous one. 
+If a change is detected, we update the maximum streak and reset the count. 
+-----------------------------------------------------
+
+
+[Approach - 2] Using Bit Manipulation - O(n) Time and O(1) Space
+The idea is to use XOR (^) to check if consecutive elements are the same. 
+As XOR of two numbers is 0 if both numbers are same. So, If prev ^ num == 0, the sequence continues; 
+else we update the maximum streak and reset the count.
+----------------------------------------------------------
+
+static int maxConsecBits(int[] arr) {
+    if (arr.length == 0) return 0; 
+
+    int maxCount = 0, count = 0, prev = -1;
+
+    for (int num : arr) {
+        
+        // If the current number is the 
+        // same as the previous number
+        if ((prev ^ num) == 0) {
+            count++;
+        } else {
+            
+            // Update maxCount and reset count
+            maxCount = Math.max(maxCount, count);
+            count = 1;
+        }
+        prev = num;
+    }
+
+    return Math.max(maxCount, count);
+}
