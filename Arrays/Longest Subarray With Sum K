@@ -1,0 +1,90 @@
+[Naive Approach] Using Nested Loop - O(n^2) Time and O(1) Space
+The idea is to check the sum of all the subarrays and return the length of the longest subarray having the sum k.
+
+---------------------------
+
+[Expected Approach] Using Hash Map and Prefix Sum - O(n) Time and O(n) Space
+If you take a closer look at this problem, this is mainly an extension of Longest Subarray with 0 sum.
+
+The idea is based on the fact that if Sj - Si = k (where Si and Sj are prefix sums till index i and j respectively, and  i < j), then the subarray between i+1 to j has sum equal to k. 
+For example, arr[] = [5, 2, -3, 4, 7] and k = 3.  The value of S3 - S0= 3,  it means the subarray from index 1 to 3 has sum equals to 3. 
+
+So we mainly compute prefix sums in the array and store these prefix sums in a hash table. And check if current prefix sum - k is already present. 
+If current prefix sum - k is present in the hash table and is mapped to index j, then subarray from j to current index has sum equal to k.
+
+
+class Solution {
+    public int longestSubarray(int[] arr, int k) {
+        // code here
+        HashMap<Integer,Integer> mp=new HashMap<>();
+        int res=0;
+        int prefix=0;
+        
+        for(int i=0;i<arr.length;i++){
+            prefix+=arr[i];
+            
+            if(prefix==k){
+                res=i+1;
+            }
+            
+            if(mp.containsKey(prefix-k)){
+                res=Math.max(res,i-mp.get(prefix-k));
+            }
+            if(!mp.containsKey(prefix)){
+                mp.put(prefix,i);
+            }
+        }
+        return res;
+    }
+}
+
+----------------------------------------------
+Two Pointer Algorithm
+Two pointers, left and right, are used to maintain the current window of elements in the array. These pointers represent the start and end of the current subarray.
+A variable, sum, is used to keep track of the sum of the elements in the current window between left and right.
+The right pointer expands the window by including new elements, increasing the sum.
+If the sum of the window exceeds k, the left pointer shrinks the window by removing elements from the start until the sum is less than or equal to k.
+If the sum of the current window equals k, the maximum length of such a subarray is updated.
+The process continues until the right pointer traverses the entire array.
+Finally, the maximum length of the subarray with sum k is returned as the result.
+
+
+
+// Class containing the sliding window algorithm
+class Solution {
+    public int longestSubarray(int[] nums, int k) {
+        int n = nums.length;
+
+        // To store the maximum length of the subarray
+        int maxLen = 0;
+
+        // Pointers for sliding window
+        int left = 0, right = 0;
+
+        // Sum of the current window
+        int sum = nums[0];
+
+        // Traverse through the array
+        while (right < n) {
+
+            // Shrink the window if sum exceeds k
+            while (left <= right && sum > k) {
+                sum -= nums[left];
+                left++;
+            }
+
+            // Update max length if sum equals k
+            if (sum == k) {
+                maxLen = Math.max(maxLen, right - left + 1);
+            }
+
+            // Expand the window to the right
+            right++;
+            if (right < n) {
+                sum += nums[right];
+            }
+        }
+
+        return maxLen;
+    }
+}
