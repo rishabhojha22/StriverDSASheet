@@ -1,0 +1,12 @@
+Using Sorting - O(n log n) Time O(1) Space
+The idea is to sort the array and traverse it to count frequencies, while tracking the minimum frequency and the result element (res) with that frequency. 
+Update values during traversal and finally check the last group to return the required element.
+
+------------------------------------
+
+Using Hash Map or Dictionary - O(n) Time O(n) Space
+The idea is to use a map to count the frequency of each element in a single traversal of the array. 
+Then, iterate over the map to find the element with the minimum frequency. 
+While doing so, maintain mn to track the minimum frequency and res to store the largest element among those with that frequency. 
+If a smaller frequency is found, update both values; if the same frequency occurs, update the result by taking the maximum element. 
+Finally, return the element having minimum frequency, and in case of a tie, the largest among them.
