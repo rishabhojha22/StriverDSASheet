@@ -1,0 +1,32 @@
+Algorithm-
+To print your name N times using recursion, the approach involves defining a recursive function that takes the current count as a parameter. 
+The function checks if the count has reached N, if it has, the recursion terminates. 
+Otherwise, it prints the name once and recursively calls itself, incrementing the count by one. 
+This way, the name gets printed exactly N times as the recursion progresses. 
+The key is to use the count to keep track of how many times the name has been printed so far and stop once it reaches N.
+
+
+class Solution {
+    // Recursive function to print name count times
+    public void printName(String name, int count, int N) {
+        // Base case: if count equals N, stop recursion
+        if (count == N)
+            return;
+
+        // Print the name
+        System.out.println(name);
+
+        // Recursive call with incremented count
+        printName(name, count + 1, N);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int N = 5;
+        String name = "Ashish";
+
+        sol.printName(name, 0, N);
+    }
+}
