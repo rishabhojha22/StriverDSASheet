@@ -1,0 +1,24 @@
+[Naive Approach] Using Sorting - O(n × log(n)) Time and O(1) Space
+The Idea is to is first sorted the array in ascending order, which ensures that the smallest element is at the front. 
+Then, the code searches for the first number that is greater than the minimum to identify the second smallest. 
+If all elements are equal and no distinct second minimum exists, it returns -1. 
+
+-------------------------------
+
+[Better Approach] Using Two Pass - O(n) Time and O(1) Space
+The main idea of this approach is to find the smallest and second smallest distinct elements in the array using two separate passes. 
+In the first loop, it identifies the minimum value (mini) by comparing each element. 
+In the second loop, it looks for the smallest element that is not equal to the minimum, which becomes the second minimum (secmini). 
+This ensures that both values are distinct
+
+--------------------------------
+
+[Expected Approach] Using Single Pass - O(n) Time and O(1) Space
+The main idea of this approach is to find the smallest and second smallest distinct elements by scanning the array only once. It uses two variables: first for the minimum value and second for the second minimum. 
+The values are updated based on the following conditions:
+=> If the current number is less than first: Update second = first and first = current number.
+=> Else if the current number is greater than first but less than second: Update second = current number.
+
+
+
+
